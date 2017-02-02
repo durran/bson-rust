@@ -5,7 +5,7 @@ use std::io::{Result, Write};
 
 /// All types that can be converted to BSON must implement the
 /// `Serializable` trait.
-trait Serializable {
+pub trait Serializable {
 
     /// Serializes the object to BSON. Implementation should write the raw
     /// bytes to the provided writer.
@@ -18,6 +18,7 @@ trait Serializable {
     fn to_bson<W: Write + ?Sized>(&self, writer: &mut W) -> Result<()>;
 }
 
+/// Implements BSON serialization for `String` types.
 impl Serializable for String {
 
     /// Serializes the object to BSON. Implementation should write the raw
