@@ -28,5 +28,23 @@ describe! lib_test {
                 }
             }
         }
+
+        describe! deserialization {
+            describe! success {
+                before_each {
+                    let bytes = vec![8, 0, 0, 0, 116, 101, 115, 116, 105, 110, 103, 0];
+                    let mut reader = Cursor::new(bytes);
+                    let result = String::from_bson(&mut reader);
+                }
+
+                it "returns an ok result" {
+                    expect!(result).to(be_ok());
+                }
+
+                it "reads the bytes from the reader" {
+                    expect!(result).to(be_ok().value("testing"));
+                }
+            }
+        }
     }
 }
