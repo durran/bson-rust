@@ -4,17 +4,38 @@
 #[macro_use(expect)]
 extern crate expectest;
 
-#[macro_use(bson, document)]
+#[macro_use]
 extern crate bson;
 
 use bson::{Bson, Document};
 use expectest::prelude::*;
 
 describe! document_test {
+    describe! document {
+        before_each {
+            let document = document! {
+                "double" => 24.5,
+                "string" => "value"
+            };
+        }
+
+        it "handles double values" {
+            expect!(document.get("double")).to(
+                be_equal_to(Some(&Bson::Double(24.5)))
+            );
+        }
+
+        it "handles string values" {
+            expect!(document.get("string")).to(
+                be_equal_to(Some(&Bson::String("value".to_string())))
+            );
+        }
+    }
+
     describe! get {
         describe! when_the_key_does_not_exist {
             before_each {
-                let mut document = document! {};
+                let document = document! {};
             }
 
             it "returns none" {
@@ -24,7 +45,7 @@ describe! document_test {
 
         describe! when_the_key_exists {
             before_each {
-                let mut document = document! {
+                let document = document! {
                     "test" => "value"
                 };
             }

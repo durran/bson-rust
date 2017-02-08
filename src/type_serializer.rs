@@ -33,9 +33,14 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     /// The `Result` object.
     pub fn serialize(&mut self, bson: &Bson) -> Result<()> {
         match bson {
+            &Bson::Double(value) => self.serialize_double(value),
             &Bson::String(ref value) => self.serialize_string(value),
             &Bson::Document(ref value) => self.serialize_document(value)
         }
+    }
+
+    fn serialize_double(&mut self, value: f64) -> Result<()> {
+        Ok(())
     }
 
     fn serialize_document(&mut self, value: &Document) -> Result<()> {
