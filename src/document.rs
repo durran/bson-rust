@@ -1,10 +1,10 @@
-use std::collections::BTreeMap;
+use linked_hash_map::LinkedHashMap;
 use bson::Bson;
 
 /// Represents a BSON document.
 #[derive(Clone, Debug, PartialEq)]
 pub struct Document {
-    elements: BTreeMap<String, Bson>
+    elements: LinkedHashMap<String, Bson>
 }
 
 /// The implementation for `Document`.
@@ -16,7 +16,7 @@ impl Document {
     /// The new `Document` instance.
     pub fn new() -> Document {
         Document {
-            elements: BTreeMap::new()
+            elements: LinkedHashMap::new()
         }
     }
 

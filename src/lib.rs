@@ -1,4 +1,5 @@
 extern crate byteorder;
+extern crate linked_hash_map;
 
 pub use bson::Bson;
 pub use document::Document;
