@@ -165,6 +165,12 @@ macro_rules! bson_code {
     };
 }
 
+/// Convenience for defining BSON symbol objects.
+#[macro_export]
+macro_rules! bson_symbol {
+    ($value:expr) => ($crate::Bson::Symbol($value.to_string()));
+}
+
 /// Convenience for defining BSON regexs.
 #[macro_export]
 macro_rules! bson_regexp {
@@ -173,4 +179,34 @@ macro_rules! bson_regexp {
             $crate::Bson::RegExp($pattern.to_string(), $options.to_string())
         }
     };
+}
+
+/// Convenience for defining BSON undefined objects.
+#[macro_export]
+macro_rules! bson_undefined {
+    () => ($crate::Bson::Undefined);
+}
+
+/// Convenience for defining BSON null objects.
+#[macro_export]
+macro_rules! bson_null {
+    () => ($crate::Bson::Null);
+}
+
+/// Convenience for defining BSON datetime objects.
+#[macro_export]
+macro_rules! bson_datetime {
+    ($value:expr) => ($crate::Bson::DateTime($value));
+}
+
+/// Convenience for defining BSON min key objects.
+#[macro_export]
+macro_rules! bson_minkey {
+    () => ($crate::Bson::MinKey);
+}
+
+/// Convenience for defining BSON max key objects.
+#[macro_export]
+macro_rules! bson_maxkey {
+    () => ($crate::Bson::MaxKey);
 }

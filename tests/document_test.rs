@@ -18,20 +18,21 @@ describe! document_test {
                 "string" => "value",
                 "document" => {},
                 "array" => [],
-                "undefined" => (Bson::Undefined),
+                "undefined" => (bson_undefined!()),
                 "true" => true,
                 "false" => false,
-                "datetime" => (Bson::DateTime(1486564200000)),
-                "null" => (Bson::Null),
+                "datetime" => (bson_datetime!(1486564200000)),
+                "null" => (bson_null!()),
                 "regexp" => (bson_regexp!("/test/", "i")),
                 "code" => (bson_code!("foo = bar", document!())),
+                "symbol" => (bson_symbol!("test")),
                 "int8" => 42i8,
                 "int16" => 42i16,
                 "int32" => 42,
                 "timestamp" => 1000u64,
                 "int64" => 42i64,
-                "minkey" => (Bson::MinKey),
-                "maxkey" => (Bson::MaxKey)
+                "minkey" => (bson_minkey!()),
+                "maxkey" => (bson_maxkey!())
             };
         }
 
@@ -98,6 +99,12 @@ describe! document_test {
         it "handles code values" {
             expect!(document.get("code")).to(
                 be_equal_to(Some(&Bson::Code("foo = bar".to_string(), document!())))
+            );
+        }
+
+        it "handles symbol values" {
+            expect!(document.get("symbol")).to(
+                be_equal_to(Some(&Bson::Symbol("test".to_string())))
             );
         }
 
