@@ -46,7 +46,7 @@ impl Document {
 
 /// Provides a convenient way for creating documents.
 #[macro_export]
-macro_rules! document {
+macro_rules! bson_doc {
     // If there are no arguments simply return an empty document.
     () => ($crate::Document::new());
 

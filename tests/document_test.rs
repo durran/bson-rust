@@ -13,7 +13,7 @@ use expectest::prelude::*;
 describe! document_test {
     describe! document {
         before_each {
-            let document = document! {
+            let document = bson_doc! {
                 "double" => 24.5,
                 "string" => "value",
                 "document" => {},
@@ -31,7 +31,7 @@ describe! document_test {
                 "datetime" => (bson_datetime!(1486564200000)),
                 "null" => (bson_null!()),
                 "regexp" => (bson_regexp!("/test/", "i")),
-                "code" => (bson_code!("foo = bar", document!())),
+                "code" => (bson_code!("foo = bar", bson_doc!())),
                 "symbol" => (bson_symbol!("test")),
                 "int8" => 42i8,
                 "int16" => 42i16,
@@ -57,13 +57,13 @@ describe! document_test {
 
         it "handles empty embedded documents" {
             expect!(document.get("document")).to(
-                be_equal_to(Some(&Bson::Document(document!())))
+                be_equal_to(Some(&Bson::Document(bson_doc!())))
             );
         }
 
         it "handles multi-level embedded documents" {
             expect!(document.get("document_with_vals")).to(
-                be_equal_to(Some(&Bson::Document(document! {
+                be_equal_to(Some(&Bson::Document(bson_doc! {
                     "embed_with_vals" => {
                         "test" => "value"
                     }
@@ -127,7 +127,7 @@ describe! document_test {
 
         it "handles code values" {
             expect!(document.get("code")).to(
-                be_equal_to(Some(&Bson::Code("foo = bar".to_string(), document!())))
+                be_equal_to(Some(&Bson::Code("foo = bar".to_string(), bson_doc!())))
             );
         }
 
@@ -179,7 +179,7 @@ describe! document_test {
     describe! get {
         describe! when_the_key_does_not_exist {
             before_each {
-                let document = document! {};
+                let document = bson_doc! {};
             }
 
             it "returns none" {
@@ -189,7 +189,7 @@ describe! document_test {
 
         describe! when_the_key_exists {
             before_each {
-                let document = document! {
+                let document = bson_doc! {
                     "test" => "value"
                 };
             }
@@ -225,7 +225,7 @@ describe! document_test {
 
         describe! when_the_key_exists {
             before_each {
-                let mut document = document! {
+                let mut document = bson_doc! {
                     "test" => "value"
                 };
                 let new_key = "test".to_string();

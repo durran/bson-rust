@@ -161,7 +161,7 @@ macro_rules! bson {
     // Create a BSON document from the values in key => value format.
     ({ $($key:expr => $value:tt),* }) => {
         {
-            $crate::Bson::Document(document! {
+            $crate::Bson::Document(bson_doc! {
                 $($key => $value),*
             })
         }
