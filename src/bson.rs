@@ -1,4 +1,5 @@
 /// The BSON enum.
+use chrono::{DateTime, UTC};
 use document::Document;
 
 /// The enum for all valid BSON types.
@@ -10,6 +11,7 @@ pub enum Bson {
     Array(Vec<Bson>), // 0x04
     Undefined, // 0x06
     Boolean(bool), // 0x08
+    DateTime(DateTime<UTC>), //0x09
     Null, // 0x0A
     RegExp(String, String), // 0x0B
     Int32(i32), // 0x10
