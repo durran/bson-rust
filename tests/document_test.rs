@@ -23,7 +23,8 @@ describe! document_test {
                 "false" => false,
                 "int8" => 42i8,
                 "int16" => 42i16,
-                "int32" => 42
+                "int32" => 42,
+                "int64" => 42i64
             };
         }
 
@@ -84,6 +85,12 @@ describe! document_test {
         it "handles 32bit integers" {
             expect!(document.get("int32")).to(
                 be_equal_to(Some(&Bson::Int32(42)))
+            );
+        }
+
+        it "handles 64bit integers" {
+            expect!(document.get("int64")).to(
+                be_equal_to(Some(&Bson::Int64(42i64)))
             );
         }
     }

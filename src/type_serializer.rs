@@ -39,7 +39,8 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::Array(ref value) => self.serialize_array(value),
             &Bson::Undefined => self.serialize_null(),
             &Bson::Boolean(value) => self.serialize_boolean(value),
-            &Bson::Int32(value) => self.serialize_int32(value)
+            &Bson::Int32(value) => self.serialize_int32(value),
+            &Bson::Int64(value) => self.serialize_int64(value)
         }
     }
 
@@ -71,6 +72,10 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     }
 
     fn serialize_int32(&mut self, value: i32) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_int64(&mut self, value: i64) -> Result<()> {
         Ok(())
     }
 }

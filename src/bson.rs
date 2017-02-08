@@ -10,7 +10,8 @@ pub enum Bson {
     Array(Vec<Bson>),
     Undefined,
     Boolean(bool),
-    Int32(i32)
+    Int32(i32),
+    Int64(i64)
 }
 
 /// The from implementation for converting a `f64` to a `Bson::Double`.
@@ -100,6 +101,21 @@ impl From<i32> for Bson {
     /// The `Bson::Int32`.
     fn from(value: i32) -> Bson {
         Bson::Int32(value)
+    }
+}
+
+/// The from implementation for converting a `i64` to a `Bson::Int64`.
+impl From<i64> for Bson {
+
+    /// Convert from a `i64` to a `Bson::Int64`.
+    ///
+    /// # Parameters
+    /// - `value` - The `i64` to convert from.
+    ///
+    /// # Returns
+    /// The `Bson::Int64`.
+    fn from(value: i64) -> Bson {
+        Bson::Int64(value)
     }
 }
 
