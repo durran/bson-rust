@@ -14,6 +14,7 @@ pub enum Bson {
     Null, // 0x0A
     RegExp(String, String), // 0x0B
     Code(String, Document), // 0x0D or 0F
+    Symbol(String), //0x0E
     Int32(i32), // 0x10
     Timestamp(u64), // 0x11
     Int64(i64), // 0x12
@@ -152,4 +153,24 @@ macro_rules! bson {
 
     // When a value is provided convert it to the BSON type.
     ($value:expr) => (::std::convert::From::from($value));
+}
+
+/// Convenience for defining BSON code objects.
+#[macro_export]
+macro_rules! bson_code {
+    ($code:expr, $scope:expr) => {
+        {
+            $crate::Bson::Code($code.to_string(), $scope)
+        }
+    };
+}
+
+/// Convenience for defining BSON regexs.
+#[macro_export]
+macro_rules! bson_regexp {
+    ($pattern:expr, $options:expr) => {
+        {
+            $crate::Bson::RegExp($pattern.to_string(), $options.to_string())
+        }
+    };
 }
