@@ -28,6 +28,7 @@ describe! document_test {
                 "int8" => 42i8,
                 "int16" => 42i16,
                 "int32" => 42,
+                "timestamp" => 1000u64,
                 "int64" => 42i64
             };
         }
@@ -113,6 +114,12 @@ describe! document_test {
         it "handles 32bit integers" {
             expect!(document.get("int32")).to(
                 be_equal_to(Some(&Bson::Int32(42)))
+            );
+        }
+
+        it "handles timestamps" {
+            expect!(document.get("timestamp")).to(
+                be_equal_to(Some(&Bson::Timestamp(1000u64)))
             );
         }
 

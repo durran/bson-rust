@@ -15,6 +15,7 @@ pub enum Bson {
     RegExp(String, String), // 0x0B
     Code(String, Document), // 0x0D or 0F
     Int32(i32), // 0x10
+    Timestamp(u64), // 0x11
     Int64(i64) // 0x12
 }
 
@@ -105,6 +106,21 @@ impl From<i32> for Bson {
     /// The `Bson::Int32`.
     fn from(value: i32) -> Bson {
         Bson::Int32(value)
+    }
+}
+
+/// The from implementation for converting a `u64` to a `Bson::Timestamp`.
+impl From<u64> for Bson {
+
+    /// Convert from a `u64` to a `Bson::Timestamp`.
+    ///
+    /// # Parameters
+    /// - `value` - The `u64` to convert from.
+    ///
+    /// # Returns
+    /// The `Bson::Timestamp`.
+    fn from(value: u64) -> Bson {
+        Bson::Timestamp(value)
     }
 }
 

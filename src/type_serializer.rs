@@ -43,8 +43,9 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::Null => self.serialize_null(),
             &Bson::RegExp(ref pattern, ref options) => self.serialize_regexp(pattern, options),
             &Bson::Code(ref code, ref scope) => self.serialize_code(code, scope),
-            &Bson::Int32(value) => self.serialize_int32(value),
-            &Bson::Int64(value) => self.serialize_int64(value)
+            &Bson::Int32(value) => self.serialize_i32(value),
+            &Bson::Timestamp(value) => self.serialize_u64(value),
+            &Bson::Int64(value) => self.serialize_i64(value)
         }
     }
 
@@ -87,11 +88,15 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
         Ok(())
     }
 
-    fn serialize_int32(&mut self, value: i32) -> Result<()> {
+    fn serialize_i32(&mut self, value: i32) -> Result<()> {
         Ok(())
     }
 
-    fn serialize_int64(&mut self, value: i64) -> Result<()> {
+    fn serialize_u64(&mut self, value: u64) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_i64(&mut self, value: i64) -> Result<()> {
         Ok(())
     }
 }
