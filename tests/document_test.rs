@@ -25,6 +25,7 @@ describe! document_test {
                 "array" => [],
                 "array_with_vals" => [ 1, 2, 3 ],
                 "array_with_one" => [ 1 ],
+                "binary" => (bson_binary!(1, vec![1, 1, 1])),
                 "undefined" => (bson_undefined!()),
                 "true" => true,
                 "false" => false,
@@ -86,6 +87,12 @@ describe! document_test {
         it "handles arrays with one value" {
             expect!(document.get("array_with_one")).to(be_equal_to(
                 Some(&Bson::Array(vec![Bson::Int32(1)]))
+            ));
+        }
+
+        it "handles binary values" {
+            expect!(document.get("binary")).to(be_equal_to(
+                Some(&Bson::Binary(1u8, vec![1u8, 1u8, 1u8]))
             ));
         }
 

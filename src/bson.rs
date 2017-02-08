@@ -8,6 +8,7 @@ pub enum Bson {
     String(String), // 0x02
     Document(Document), // 0x03
     Array(Vec<Bson>), // 0x04
+    Binary(u8, Vec<u8>), // 0x05
     Undefined, // 0x06
     Boolean(bool), // 0x08
     DateTime(i64), //0x09
@@ -169,6 +170,16 @@ macro_rules! bson {
 
     // When a value is provided convert it to the BSON type.
     ($value:expr) => (::std::convert::From::from($value));
+}
+
+/// Convenience for defining BSON binary objects.
+#[macro_export]
+macro_rules! bson_binary {
+    ($subtype:expr, $value:expr) => {
+        {
+            $crate::Bson::Binary($subtype, $value)
+        }
+    };
 }
 
 /// Convenience for defining BSON code objects.

@@ -37,6 +37,7 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::String(ref value) => self.serialize_string(value),
             &Bson::Document(ref value) => self.serialize_document(value),
             &Bson::Array(ref value) => self.serialize_array(value),
+            &Bson::Binary(t, ref value) => self.serialize_binary(t, value),
             &Bson::Undefined => self.serialize_null(),
             &Bson::Boolean(value) => self.serialize_boolean(value),
             &Bson::DateTime(value) => self.serialize_datetime(value),
@@ -68,6 +69,10 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     }
 
     fn serialize_array(&mut self, value: &Vec<Bson>) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_binary(&mut self, t: u8, value: &Vec<u8>) -> Result<()> {
         Ok(())
     }
 
