@@ -18,6 +18,7 @@ describe! document_test {
                 "string" => "value",
                 "document" => {},
                 "array" => [],
+                "array_with_vals" => [ 1, 2, 3 ],
                 "undefined" => (bson_undefined!()),
                 "true" => true,
                 "false" => false,
@@ -58,6 +59,12 @@ describe! document_test {
             expect!(document.get("array")).to(
                 be_equal_to(Some(&Bson::Array(vec![])))
             );
+        }
+
+        it "handles arrays with values" {
+            expect!(document.get("array_with_vals")).to(be_equal_to(
+                Some(&Bson::Array(vec![Bson::Int32(1), Bson::Int32(2), Bson::Int32(3)]))
+            ));
         }
 
         it "handles undefined" {
