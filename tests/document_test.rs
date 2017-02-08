@@ -21,6 +21,8 @@ describe! document_test {
                 "undefined" => (Bson::Undefined),
                 "true" => true,
                 "false" => false,
+                "int8" => 42i8,
+                "int16" => 42i16,
                 "int32" => 42
             };
         }

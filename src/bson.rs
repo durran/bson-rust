@@ -58,6 +58,36 @@ impl From<bool> for Bson {
     }
 }
 
+/// The from implementation for converting a `i8` to a `Bson::Int32`.
+impl From<i8> for Bson {
+
+    /// Convert from a `i8` to a `Bson::Int32`.
+    ///
+    /// # Parameters
+    /// - `value` - The `i8` to convert from.
+    ///
+    /// # Returns
+    /// The `Bson::Int32`.
+    fn from(value: i8) -> Bson {
+        Bson::Int32(value as i32)
+    }
+}
+
+/// The from implementation for converting a `i16` to a `Bson::Int32`.
+impl From<i16> for Bson {
+
+    /// Convert from a `i16` to a `Bson::Int32`.
+    ///
+    /// # Parameters
+    /// - `value` - The `i16` to convert from.
+    ///
+    /// # Returns
+    /// The `Bson::Int32`.
+    fn from(value: i16) -> Bson {
+        Bson::Int32(value as i32)
+    }
+}
+
 /// The from implementation for converting a `i32` to a `Bson::Int32`.
 impl From<i32> for Bson {
 
