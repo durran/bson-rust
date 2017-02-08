@@ -7,3 +7,8 @@ pub enum Bson {
     String(String),
     Document(Document)
 }
+
+#[macro_export]
+macro_rules! bson {
+    ($value:expr) => ($crate::Bson::String($value.to_string()));
+}

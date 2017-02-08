@@ -6,7 +6,9 @@ pub use document::Document;
 pub use document_serializer::DocumentSerializer;
 pub use type_serializer::TypeSerializer;
 
+#[macro_use]
 mod bson;
+#[macro_use]
 mod document;
 mod document_serializer;
 mod type_serializer;

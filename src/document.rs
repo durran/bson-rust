@@ -43,3 +43,19 @@ impl Document {
         return self.elements.insert(key, value);
     }
 }
+
+/// Provides a convenient way for creating documents.
+#[macro_export]
+macro_rules! document {
+    // If there are no arguments simply return an empty document.
+    () => ($crate::Document::new());
+
+    // If arguments are provided construct the document with the key/value pairs.
+    ($($key:expr => $value:tt),*) => {
+        {
+            let mut document = $crate::Document::new();
+            $(document.insert($key.to_string(), bson!($value));)*
+            document
+        }
+    };
+}
