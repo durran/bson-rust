@@ -69,6 +69,18 @@ describe! document_test {
             );
         }
 
+        it "handles 8bit integers" {
+            expect!(document.get("int8")).to(
+                be_equal_to(Some(&Bson::Int32(42)))
+            );
+        }
+
+        it "handles 16bit integers" {
+            expect!(document.get("int16")).to(
+                be_equal_to(Some(&Bson::Int32(42)))
+            );
+        }
+
         it "handles 32bit integers" {
             expect!(document.get("int32")).to(
                 be_equal_to(Some(&Bson::Int32(42)))
