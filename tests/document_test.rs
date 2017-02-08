@@ -20,7 +20,8 @@ describe! document_test {
                 "array" => [],
                 "undefined" => (Bson::Undefined),
                 "true" => true,
-                "false" => false
+                "false" => false,
+                "int32" => 42
             };
         }
 
@@ -63,6 +64,12 @@ describe! document_test {
         it "handles boolean false" {
             expect!(document.get("false")).to(
                 be_equal_to(Some(&Bson::Boolean(false)))
+            );
+        }
+
+        it "handles 32bit integers" {
+            expect!(document.get("int32")).to(
+                be_equal_to(Some(&Bson::Int32(42)))
             );
         }
     }

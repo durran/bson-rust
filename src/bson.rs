@@ -9,7 +9,8 @@ pub enum Bson {
     Document(Document),
     Array(Vec<Bson>),
     Undefined,
-    Boolean(bool)
+    Boolean(bool),
+    Int32(i32)
 }
 
 /// The from implementation for converting a `f64` to a `Bson::Double`.
@@ -57,10 +58,30 @@ impl From<bool> for Bson {
     }
 }
 
+/// The from implementation for converting a `i32` to a `Bson::Int32`.
+impl From<i32> for Bson {
+
+    /// Convert from a `i32` to a `Bson::Int32`.
+    ///
+    /// # Parameters
+    /// - `value` - The `i32` to convert from.
+    ///
+    /// # Returns
+    /// The `Bson::Int32`.
+    fn from(value: i32) -> Bson {
+        Bson::Int32(value)
+    }
+}
+
 /// Converts expressions in the macro to normal `Bson` variants.
 #[macro_export]
 macro_rules! bson {
+    // Create an empty array when no values given.
     ([]) => ($crate::Bson::Array(Vec::new()));
+
+    // Create an empty document when no values given.
     ({}) => ($crate::Bson::Document($crate::Document::new()));
+
+    // When a value is provided convert it to the BSON type.
     ($value:expr) => (::std::convert::From::from($value));
 }
