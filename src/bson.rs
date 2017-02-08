@@ -6,7 +6,8 @@ use document::Document;
 pub enum Bson {
     Double(f64),
     String(String),
-    Document(Document)
+    Document(Document),
+    Array(Vec<Bson>)
 }
 
 /// The from implementation for converting a `f64` to a `Bson::Double`.
@@ -42,5 +43,7 @@ impl<'a> From<&'a str> for Bson {
 /// Converts expressions in the macro to normal `Bson` variants.
 #[macro_export]
 macro_rules! bson {
+    ([]) => ($crate::Bson::Array(Vec::new()));
+    ({}) => ($crate::Bson::Document($crate::Document::new()));
     ($value:expr) => (::std::convert::From::from($value));
 }

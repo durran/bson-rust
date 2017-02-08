@@ -15,7 +15,9 @@ describe! document_test {
         before_each {
             let document = document! {
                 "double" => 24.5,
-                "string" => "value"
+                "string" => "value",
+                "document" => {},
+                "array" => []
             };
         }
 
@@ -28,6 +30,18 @@ describe! document_test {
         it "handles string values" {
             expect!(document.get("string")).to(
                 be_equal_to(Some(&Bson::String("value".to_string())))
+            );
+        }
+
+        it "handles embedded documents" {
+            expect!(document.get("document")).to(
+                be_equal_to(Some(&Bson::Document(document!())))
+            );
+        }
+
+        it "handles arrays" {
+            expect!(document.get("array")).to(
+                be_equal_to(Some(&Bson::Array(vec![])))
             );
         }
     }

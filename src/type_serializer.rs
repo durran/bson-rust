@@ -35,7 +35,8 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
         match bson {
             &Bson::Double(value) => self.serialize_double(value),
             &Bson::String(ref value) => self.serialize_string(value),
-            &Bson::Document(ref value) => self.serialize_document(value)
+            &Bson::Document(ref value) => self.serialize_document(value),
+            &Bson::Array(ref value) => self.serialize_array(value)
         }
     }
 
@@ -43,14 +44,18 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
         Ok(())
     }
 
-    fn serialize_document(&mut self, value: &Document) -> Result<()> {
-        Ok(())
-    }
-
     fn serialize_string(&mut self, value: &str) -> Result<()> {
         self.writer.write_i32::<LittleEndian>(value.len() as i32 + 1);
         self.writer.write_all(value.as_bytes());
         self.writer.write_u8(0);
+        Ok(())
+    }
+
+    fn serialize_document(&mut self, value: &Document) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_array(&mut self, value: &Vec<Bson>) -> Result<()> {
         Ok(())
     }
 }
