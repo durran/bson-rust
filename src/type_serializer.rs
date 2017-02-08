@@ -42,6 +42,7 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::DateTime(value) => self.serialize_datetime(value),
             &Bson::Null => self.serialize_null(),
             &Bson::RegExp(ref pattern, ref options) => self.serialize_regexp(pattern, options),
+            &Bson::Code(ref code, ref scope) => self.serialize_code(code, scope),
             &Bson::Int32(value) => self.serialize_int32(value),
             &Bson::Int64(value) => self.serialize_int64(value)
         }
@@ -79,6 +80,10 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     }
 
     fn serialize_regexp(&mut self, pattern: &str, options: &str) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_code(&mut self, code: &str, scope: &Document) -> Result<()> {
         Ok(())
     }
 

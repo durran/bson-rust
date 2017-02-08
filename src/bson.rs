@@ -13,6 +13,7 @@ pub enum Bson {
     DateTime(i64), //0x09
     Null, // 0x0A
     RegExp(String, String), // 0x0B
+    Code(String, Document), // 0x0D or 0F
     Int32(i32), // 0x10
     Int64(i64) // 0x12
 }

@@ -24,6 +24,7 @@ describe! document_test {
                 "datetime" => (Bson::DateTime(1486564200000)),
                 "null" => (Bson::Null),
                 "regexp" => (Bson::RegExp("/test/".to_string(), "i".to_string())),
+                "code" => (Bson::Code("foo = bar".to_string(), document!())),
                 "int8" => 42i8,
                 "int16" => 42i16,
                 "int32" => 42,
@@ -88,6 +89,12 @@ describe! document_test {
         it "handles regexp values" {
             expect!(document.get("regexp")).to(
                 be_equal_to(Some(&Bson::RegExp("/test/".to_string(), "i".to_string())))
+            );
+        }
+
+        it "handles code values" {
+            expect!(document.get("code")).to(
+                be_equal_to(Some(&Bson::Code("foo = bar".to_string(), document!())))
             );
         }
 
