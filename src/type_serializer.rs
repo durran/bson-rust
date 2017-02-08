@@ -43,6 +43,7 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::DateTime(value) => self.serialize_datetime(value),
             &Bson::Null => self.serialize_null(),
             &Bson::RegExp(ref pattern, ref options) => self.serialize_regexp(pattern, options),
+            &Bson::DbPointer(ref name, ref id) => self.serialize_dbpointer(name, id),
             &Bson::Code(ref code, ref scope) => self.serialize_code(code, scope),
             &Bson::Symbol(ref value) => self.serialize_string(value),
             &Bson::Int32(value) => self.serialize_i32(value),
@@ -89,6 +90,10 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     }
 
     fn serialize_regexp(&mut self, pattern: &str, options: &str) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_dbpointer(&mut self, name: &str, id: &[u8; 12]) -> Result<()> {
         Ok(())
     }
 

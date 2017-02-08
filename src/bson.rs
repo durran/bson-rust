@@ -14,6 +14,7 @@ pub enum Bson {
     DateTime(i64), //0x09
     Null, // 0x0A
     RegExp(String, String), // 0x0B
+    DbPointer(String, [u8; 12]), // 0x0C
     Code(String, Document), // 0x0D or 0F
     Symbol(String), //0x0E
     Int32(i32), // 0x10
@@ -204,6 +205,16 @@ macro_rules! bson_regexp {
     ($pattern:expr, $options:expr) => {
         {
             $crate::Bson::RegExp($pattern.to_string(), $options.to_string())
+        }
+    };
+}
+
+/// Convenience for defining BSON db pointers.
+#[macro_export]
+macro_rules! bson_dbpointer {
+    ($name:expr, $id:expr) => {
+        {
+            $crate::Bson::DbPointer($name.to_string(), $id)
         }
     };
 }

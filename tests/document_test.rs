@@ -32,6 +32,7 @@ describe! document_test {
                 "datetime" => (bson_datetime!(1486564200000)),
                 "null" => (bson_null!()),
                 "regexp" => (bson_regexp!("/test/", "i")),
+                "dbpointer" => (bson_dbpointer!("test", [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])),
                 "code" => (bson_code!("foo = bar", document!())),
                 "symbol" => (bson_symbol!("test")),
                 "int8" => 42i8,
@@ -130,6 +131,12 @@ describe! document_test {
             expect!(document.get("regexp")).to(
                 be_equal_to(Some(&Bson::RegExp("/test/".to_string(), "i".to_string())))
             );
+        }
+
+        it "handles dbpointer values" {
+            expect!(document.get("dbpointer")).to(be_equal_to(
+                Some(&Bson::DbPointer("test".to_string(), [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]))
+            ));
         }
 
         it "handles code values" {
