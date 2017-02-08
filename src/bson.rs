@@ -7,7 +7,9 @@ pub enum Bson {
     Double(f64),
     String(String),
     Document(Document),
-    Array(Vec<Bson>)
+    Array(Vec<Bson>),
+    Undefined,
+    Boolean(bool)
 }
 
 /// The from implementation for converting a `f64` to a `Bson::Double`.
@@ -37,6 +39,21 @@ impl<'a> From<&'a str> for Bson {
     /// The `Bson::String`.
     fn from(value: &str) -> Bson {
         Bson::String(value.to_string())
+    }
+}
+
+/// The from implementation for converting a `bool` to a `Bson::Boolean`.
+impl From<bool> for Bson {
+
+    /// Convert from a `bool` to a `Bson::Double`.
+    ///
+    /// # Parameters
+    /// - `value` - The `bool` to convert from.
+    ///
+    /// # Returns
+    /// The `Bson::Boolean`.
+    fn from(value: bool) -> Bson {
+        Bson::Boolean(value)
     }
 }
 

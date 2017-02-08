@@ -17,7 +17,10 @@ describe! document_test {
                 "double" => 24.5,
                 "string" => "value",
                 "document" => {},
-                "array" => []
+                "array" => [],
+                "undefined" => (Bson::Undefined),
+                "true" => true,
+                "false" => false
             };
         }
 
@@ -33,15 +36,33 @@ describe! document_test {
             );
         }
 
-        it "handles embedded documents" {
+        it "handles empty embedded documents" {
             expect!(document.get("document")).to(
                 be_equal_to(Some(&Bson::Document(document!())))
             );
         }
 
-        it "handles arrays" {
+        it "handles empty arrays" {
             expect!(document.get("array")).to(
                 be_equal_to(Some(&Bson::Array(vec![])))
+            );
+        }
+
+        it "handles undefined" {
+            expect!(document.get("undefined")).to(
+                be_equal_to(Some(&Bson::Undefined))
+            );
+        }
+
+        it "handles boolean true" {
+            expect!(document.get("true")).to(
+                be_equal_to(Some(&Bson::Boolean(true)))
+            );
+        }
+
+        it "handles boolean false" {
+            expect!(document.get("false")).to(
+                be_equal_to(Some(&Bson::Boolean(false)))
             );
         }
     }
