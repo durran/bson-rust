@@ -9,7 +9,7 @@ extern crate bson;
 extern crate chrono;
 
 use bson::{Bson, Document};
-use chrono::{TimeZone, UTC};
+use chrono::{Timelike, TimeZone, UTC};
 use expectest::prelude::*;
 
 describe! document_test {
@@ -23,7 +23,7 @@ describe! document_test {
                 "undefined" => (Bson::Undefined),
                 "true" => true,
                 "false" => false,
-                "datetime" => (Bson::DateTime(UTC.ymd(2017, 2, 8).and_hms(14, 30, 0))),
+                "datetime" => (UTC.ymd(2017, 2, 8).and_hms(14, 30, 0)),
                 "null" => (Bson::Null),
                 "regexp" => (Bson::RegExp("/test/".to_string(), "i".to_string())),
                 "int8" => 42i8,
@@ -77,7 +77,7 @@ describe! document_test {
 
         it "handles datetime values" {
             expect!(document.get("datetime")).to(
-                be_equal_to(Some(&Bson::DateTime(UTC.ymd(2017, 2, 8).and_hms(14, 30, 0))))
+                be_equal_to(Some(&Bson::DateTime(1486564200000)))
             );
         }
 
