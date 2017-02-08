@@ -40,6 +40,7 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::Undefined => self.serialize_null(),
             &Bson::Boolean(value) => self.serialize_boolean(value),
             &Bson::Null => self.serialize_null(),
+            &Bson::RegExp(ref pattern, ref options) => self.serialize_regexp(pattern, options),
             &Bson::Int32(value) => self.serialize_int32(value),
             &Bson::Int64(value) => self.serialize_int64(value)
         }
@@ -69,6 +70,10 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     }
 
     fn serialize_boolean(&mut self, value: bool) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_regexp(&mut self, pattern: &str, options: &str) -> Result<()> {
         Ok(())
     }
 

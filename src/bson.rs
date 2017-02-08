@@ -11,6 +11,7 @@ pub enum Bson {
     Undefined, // 0x06
     Boolean(bool), // 0x08
     Null, // 0x0A
+    RegExp(String, String), // 0x0B
     Int32(i32), // 0x10
     Int64(i64) // 0x12
 }

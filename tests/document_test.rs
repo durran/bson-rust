@@ -22,6 +22,7 @@ describe! document_test {
                 "true" => true,
                 "false" => false,
                 "null" => (Bson::Null),
+                "regexp" => (Bson::RegExp("/test/".to_string(), "i".to_string())),
                 "int8" => 42i8,
                 "int16" => 42i16,
                 "int32" => 42,
@@ -74,6 +75,12 @@ describe! document_test {
         it "handles null" {
             expect!(document.get("null")).to(
                 be_equal_to(Some(&Bson::Null))
+            );
+        }
+
+        it "handles regexp values" {
+            expect!(document.get("regexp")).to(
+                be_equal_to(Some(&Bson::RegExp("/test/".to_string(), "i".to_string())))
             );
         }
 
