@@ -1,5 +1,4 @@
 /// The BSON enum.
-use chrono::{Timelike, DateTime, UTC};
 use document::Document;
 
 /// The enum for all valid BSON types.
@@ -60,21 +59,6 @@ impl From<bool> for Bson {
     /// The `Bson::Boolean`.
     fn from(value: bool) -> Bson {
         Bson::Boolean(value)
-    }
-}
-
-/// The from implementation for converting a `DateTime` to a `Bson::DateTime`.
-impl From<DateTime<UTC>> for Bson {
-
-    /// Convert from a `DateTime` to a `Bson::DateTime`.
-    ///
-    /// # Parameters
-    /// - `value` - The `DateTime` to convert from.
-    ///
-    /// # Returns
-    /// The `Bson::Double`.
-    fn from(value: DateTime<UTC>) -> Bson {
-        Bson::DateTime((value.timestamp() * 1000) + (value.nanosecond() / 1000000) as i64)
     }
 }
 

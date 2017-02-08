@@ -1,5 +1,4 @@
 use byteorder::{LittleEndian, WriteBytesExt};
-use chrono::{DateTime, UTC};
 use std::io::{Result, Write};
 use bson::Bson;
 use document::Document;

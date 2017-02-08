@@ -1,5 +1,4 @@
 extern crate byteorder;
-extern crate chrono;
 extern crate linked_hash_map;
 
 pub use bson::Bson;

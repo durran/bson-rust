@@ -6,10 +6,8 @@ extern crate expectest;
 
 #[macro_use]
 extern crate bson;
-extern crate chrono;
 
 use bson::{Bson, Document};
-use chrono::{Timelike, TimeZone, UTC};
 use expectest::prelude::*;
 
 describe! document_test {
@@ -23,7 +21,7 @@ describe! document_test {
                 "undefined" => (Bson::Undefined),
                 "true" => true,
                 "false" => false,
-                "datetime" => (UTC.ymd(2017, 2, 8).and_hms(14, 30, 0)),
+                "datetime" => (Bson::DateTime(1486564200000)),
                 "null" => (Bson::Null),
                 "regexp" => (Bson::RegExp("/test/".to_string(), "i".to_string())),
                 "int8" => 42i8,
