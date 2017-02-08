@@ -148,7 +148,7 @@ macro_rules! bson {
     // Create an empty array when no values given.
     ([]) => ($crate::Bson::Array(Vec::new()));
 
-    // Creating an BSON array with values present.
+    // Creating a BSON array with values present.
     ([$($value:tt),*]) => {{
         let mut vec = Vec::new();
         $(vec.push(bson!($value));)*
@@ -157,6 +157,15 @@ macro_rules! bson {
 
     // Create an empty document when no values given.
     ({}) => ($crate::Bson::Document($crate::Document::new()));
+
+    // Create a BSON document from the values in key => value format.
+    ({ $($key:expr => $value:tt),* }) => {
+        {
+            $crate::Bson::Document(document! {
+                $($key => $value),*
+            })
+        }
+    };
 
     // When a value is provided convert it to the BSON type.
     ($value:expr) => (::std::convert::From::from($value));
