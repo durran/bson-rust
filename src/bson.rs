@@ -4,14 +4,15 @@ use document::Document;
 /// The enum for all valid BSON types.
 #[derive(Clone, Debug, PartialEq)]
 pub enum Bson {
-    Double(f64),
-    String(String),
-    Document(Document),
-    Array(Vec<Bson>),
-    Undefined,
-    Boolean(bool),
-    Int32(i32),
-    Int64(i64)
+    Double(f64), // 0x01
+    String(String), // 0x02
+    Document(Document), // 0x03
+    Array(Vec<Bson>), // 0x04
+    Undefined, // 0x06
+    Boolean(bool), // 0x08
+    Null, // 0x0A
+    Int32(i32), // 0x10
+    Int64(i64) // 0x12
 }
 
 /// The from implementation for converting a `f64` to a `Bson::Double`.

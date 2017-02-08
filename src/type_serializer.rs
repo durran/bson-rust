@@ -39,6 +39,7 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::Array(ref value) => self.serialize_array(value),
             &Bson::Undefined => self.serialize_null(),
             &Bson::Boolean(value) => self.serialize_boolean(value),
+            &Bson::Null => self.serialize_null(),
             &Bson::Int32(value) => self.serialize_int32(value),
             &Bson::Int64(value) => self.serialize_int64(value)
         }

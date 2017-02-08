@@ -21,6 +21,7 @@ describe! document_test {
                 "undefined" => (Bson::Undefined),
                 "true" => true,
                 "false" => false,
+                "null" => (Bson::Null),
                 "int8" => 42i8,
                 "int16" => 42i16,
                 "int32" => 42,
@@ -67,6 +68,12 @@ describe! document_test {
         it "handles boolean false" {
             expect!(document.get("false")).to(
                 be_equal_to(Some(&Bson::Boolean(false)))
+            );
+        }
+
+        it "handles null" {
+            expect!(document.get("null")).to(
+                be_equal_to(Some(&Bson::Null))
             );
         }
 
