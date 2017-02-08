@@ -29,7 +29,9 @@ describe! document_test {
                 "int16" => 42i16,
                 "int32" => 42,
                 "timestamp" => 1000u64,
-                "int64" => 42i64
+                "int64" => 42i64,
+                "minkey" => (Bson::MinKey),
+                "maxkey" => (Bson::MaxKey)
             };
         }
 
@@ -127,6 +129,14 @@ describe! document_test {
             expect!(document.get("int64")).to(
                 be_equal_to(Some(&Bson::Int64(42i64)))
             );
+        }
+
+        it "handles min key" {
+            expect!(document.get("minkey")).to(be_equal_to(Some(&Bson::MinKey)));
+        }
+
+        it "handles max key" {
+            expect!(document.get("maxkey")).to(be_equal_to(Some(&Bson::MaxKey)));
         }
     }
 

@@ -45,7 +45,9 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
             &Bson::Code(ref code, ref scope) => self.serialize_code(code, scope),
             &Bson::Int32(value) => self.serialize_i32(value),
             &Bson::Timestamp(value) => self.serialize_u64(value),
-            &Bson::Int64(value) => self.serialize_i64(value)
+            &Bson::Int64(value) => self.serialize_i64(value),
+            &Bson::MinKey => self.serialize_minkey(),
+            &Bson::MaxKey => self.serialize_maxkey()
         }
     }
 
@@ -97,6 +99,14 @@ impl<'a, W> TypeSerializer<'a, W> where W: Write + 'a {
     }
 
     fn serialize_i64(&mut self, value: i64) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_minkey(&mut self) -> Result<()> {
+        Ok(())
+    }
+
+    fn serialize_maxkey(&mut self) -> Result<()> {
         Ok(())
     }
 }

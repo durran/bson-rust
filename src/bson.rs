@@ -16,7 +16,9 @@ pub enum Bson {
     Code(String, Document), // 0x0D or 0F
     Int32(i32), // 0x10
     Timestamp(u64), // 0x11
-    Int64(i64) // 0x12
+    Int64(i64), // 0x12
+    MinKey, // 0xFF
+    MaxKey // 0x7F
 }
 
 /// The from implementation for converting a `f64` to a `Bson::Double`.
